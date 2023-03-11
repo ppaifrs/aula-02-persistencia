@@ -11,6 +11,22 @@ import java.util.List;
 import app.modelo.entidade.Tecnico;
 
 public class TecnicoRepository {
+
+    public void delete(Tecnico t) {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:sqlite:mochinho.db");
+
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM tecnico WHERE codigo = ?");
+
+            stmt.setLong(1, t.getCodigo());
+
+            stmt.execute();
+
+            con.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
     
     public void save(Tecnico t) {
 
